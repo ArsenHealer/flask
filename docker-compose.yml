@@ -1,0 +1,20 @@
+version: '3.8'  # Версия Compose файла
+
+services:
+  web:  # Имя сервиса
+    build: ./app
+    networks:
+      docker_tor-network:
+        ipv4_address: 10.5.8.23  # Статический IP-адрес
+    ports:
+      - "5000:5000"  # Проброс портов
+    restart: on-failure  # Поведение при перезапуске (аналог --rm, но с контролем)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+networks:
+  docker_tor-network:
+    external: true  # Указываем, что сеть уже существует
