@@ -1,10 +1,8 @@
-version: '3.8'  # Версия Compose файла
-
 services:
-  web:  # Имя сервиса
+  web:
     build: ./app
     networks:
-      docker_tor-network:
+      testing-tor-docker-compose_tor-network:
         ipv4_address: 10.5.8.23  # Статический IP-адрес
     ports:
       - "5000:5000"  # Проброс портов
@@ -16,5 +14,5 @@ services:
           memory: 512M
 
 networks:
-  docker_tor-network:
+  testing-tor-docker-compose_tor-network:
     external: true  # Указываем, что сеть уже существует

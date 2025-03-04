@@ -1,15 +1,11 @@
-import os
+from flask import Flask, request
 
-from flask import Flask
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
-    return 'Hello, world!'
+    real_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    return f"Real IP: {real_ip}"
 
-
-if __name__ == '__main__':
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
