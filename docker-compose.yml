@@ -4,17 +4,10 @@ services:
     networks:
       testing-tor-docker-compose_tor-network:
         ipv4_address: 10.5.8.23  # Статический IP-адрес
-    volumes:
-      - somevol:/shavol
-    ports:
-      - "5000:5000"  # Проброс портов
-    restart: on-failure  # Поведение при перезапуске (аналог --rm, но с контролем)
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
+    expose:
+      - "5000"  # Проброс портов
 
 networks:
   testing-tor-docker-compose_tor-network:
+    driver: bridge
     external: true  # Указываем, что сеть уже существует
